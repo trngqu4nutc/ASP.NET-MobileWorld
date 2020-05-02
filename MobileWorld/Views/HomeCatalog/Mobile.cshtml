@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="filter">
+    <div id="brands" class="manu manu6">
+    </div>
+    <div class="fl price">
+        <label>Chọn mức giá: </label>
+        <a href="#" class="cost" onclick="controller.FilterCost($(this))" data-id="10">
+            Dưới 10 triệu
+        </a>
+        <a href="#" class="cost" onclick="controller.FilterCost($(this))" data-id="15">
+            10 - 15 triệu
+        </a>
+        <a href="#" class="cost" onclick="controller.FilterCost($(this))" data-id="25">
+            15 - 25 triệu
+        </a>
+        <a href="#" class="cost" onclick="controller.FilterCost($(this))" data-id="26">
+            Trên 25 triệu
+        </a>
+        <a class="resetPage"><i class="fas fa-redo"></i>Tất cả</a>
+    </div>
+</div>
+<hr style="width: 76%;" />
+
+<div class="single-product-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div id="data-catalogs"></div>
+        </div>
+        <a style="margin-left: 420px;" href="javascript:More(true)" class="viewmore">Xem thêm điện thoại</a>
+    </div>
+</div>
+
+<script id="data-template" type="x-tmpl-mustache">
+    <div class="col-md-3 col-sm-6">
+        <div class="single-shop-product">
+            <div class="product-upper">
+                <a href="{{pictureuri}}"><img src="{{pictureuri}}" alt="{{name}}"></a>
+            </div>
+            <h2><a href="/Detail/Index/{{id}}">{{name}}</a></h2>
+            <div class="product-carousel-price">
+                {{price}} VNĐ
+            </div>
+
+            <div class="product-option-shop">
+                <button onclick="addToCart($(this))" class="add_to_cart_button" data-quantity="1" data-id="{{id}}">Thêm vào giỏ</button>
+            </div>
+        </div>
+    </div>
+</script>
+<script id="data-brands" type="x-tmpl-mustache">
+    <a onclick="controller.FilterBrand($(this))" class="logo" data-id="{{id}}"><img src="{{pictureurl}}"></a>
+</script>
+@section ClientScript{
+    <script src="/Assets/admin/js/plugins/mustache.min.js"></script>
+    <script src="~/Assets/web/controller/MobileController.js"></script>
+}

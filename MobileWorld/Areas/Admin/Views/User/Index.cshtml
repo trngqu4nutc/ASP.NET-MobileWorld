@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "Quản lý người dùng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Danh sách người dùng.
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card mb-3">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-4">
+                        <i class="fas fa-table"></i>
+                        Data Table Example
+                    </div>
+                    <div class="col-md-4">
+                        <div class="fa-pull-right">
+                            <input type="text" class="form-control" id="txtSeach" name="seachUser" placeholder="Tìm kiếm" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <select id="slSeach" class="form-control">
+                            <option value="">All</option>
+                            <option value="true">Active</option>
+                            <option value="false">Looked</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button id="btnSeach" class="btn btn-info"><i class="fas fa-search"></i></button>
+                        <button id="btnReset" class="btn btn-secondary"><i class="fas fa-redo"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Tài khoản</th>
+                                <th>Họ tên</th>
+                                <th>Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
+                                <th>Trạng thái</th>
+                                <th>Quyền</th>
+                                <th><button id="btnAdd" class="btn btn-success"><i class="fas fa-user-plus"></i></button></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblData"></tbody>
+                    </table>
+                    <div id="pagination" class="pagination">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="data-template" type="x-tmpl-mustache">
+    <tr>
+        <td>{{id}}</td>
+        <td>{{username}}</td>
+        <td>{{fullname}}</td>
+        <td>{{{email}}}</td>
+        <td>{{phonenumber}}</td>
+        <td>{{address}}</td>
+        <td>{{{status}}}</td>
+        <td>{{role}}</td>
+        <td>
+            <button data-id="{{id}}" class="btnEdit btn btn-sm btn-info"><i class="fas fa-edit"></i></button>
+        </td>
+    </tr>
+</script>
+
+@*<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Xóa
+    </button>*@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông tin</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formData" class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="txtUsername">Tài khoản:</label>
+                                <input id="txtUsername" type="text" name="username" class="form-control" />
+                            </div>
+                            <div class="form-group pass">
+                                <label for="txtPassword">Mật khẩu:</label>
+                                <input id="txtPassword" type="text" name="password" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="txtName">Họ Tên:</label>
+                                <input id="txtName" type="text" name="" class="form-control" />
+                                <input id="txtId" type="hidden" value="0" name="" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="txtPhone">Số điện thoại:</label>
+                                <input id="txtPhone" type="text" name="" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="txtEmail">Email:</label>
+                                <input id="txtEmail" type="text" name="" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="slActive">Trạng thái:</label>
+                                <select id="slActive" class="form-control">
+                                    <option value="">Status</option>
+                                    <option value="true">Active</option>
+                                    <option value="false">Looked</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtAddress">Địa chỉ:</label>
+                                <input id="txtAddress" type="text" name="" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCancel" class="btn btn-secondary">Hủy</button>
+                <button type="button" id="btnSave" class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section ClientScript
+{
+    <script src="~/Assets/admin/controller/userController.js"></script>
+}

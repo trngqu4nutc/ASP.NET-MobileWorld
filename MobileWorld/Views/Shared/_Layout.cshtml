@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mobile World</title>
+
+    <link href="/Assets/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/Assets/web/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/Assets/web/css/font-awesome.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/Assets/web/css/owl.carousel.css">
+    <link href="/Assets/web/css/navbar.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/Assets/web/css/style.css">
+    <link rel="stylesheet" href="/Assets/web/css/responsive.css">
+    <link href="/Assets/web/css/detail.css" rel="stylesheet" />
+    <link href="/Assets/web/css/filter.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <div class="mynavbar">
+        <a class="active" href="/">
+            <img src="/Assets/web/img/mobileworld.png" width="50" />
+            Mobile World
+        </a>
+
+        <div class="search-container">
+            <form action="/action_page.php">
+                <input id="search" type="text" placeholder="Tìm sản phẩm, thương hiệu và tên shop ..." autocomplete="off" name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+            <ul class="mystyleul">
+                <li>
+                    <a href="/">Trang chủ</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Mobile", "HomeCatalog")" id="dienthoai">Điện thoại</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Laptop", "HomeCatalog")" id="laptop">Laptop</a>
+                </li>
+                <li>
+                    <a href="#">Liên hệ</a>
+                </li>
+                <li>
+                    @{
+                        var session = (MobileWorld.Models.LoginModel)Session["USER_SESSION"];
+                        var text = "";
+                        var name = "";
+                        if (session == null) { text = "Đăng nhập"; } else { text = "Đăng xuất"; name = session.username; }
+                    }
+                    <a id="login">@text</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="navlinks">
+            <li>
+                <a href="#" class="greeting" id="greeting">Xin chào @name</a>
+            </li>
+            <li>
+                <a href="/Basket" class="shopping-item">
+                    <span>
+                        Giỏ hàng
+                        <i class="fa fa-shopping-cart"></i>
+                        <span class="product-count">5</span>
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    @RenderBody()
+
+    <div class="footer-top-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-about-us">
+                        <h2>u<span>Stora</span></h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis magni at?</p>
+                        <div class="footer-social">
+                            <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+                            <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
+                            <a href="#" target="_blank"><i class="fa fa-youtube"></i></a>
+                            <a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-menu">
+                        <h2 class="footer-wid-title">User Navigation </h2>
+                        <ul>
+                            <li><a href="#">My account</a></li>
+                            <li><a href="#">Order history</a></li>
+                            <li><a href="#">Wishlist</a></li>
+                            <li><a href="#">Vendor contact</a></li>
+                            <li><a href="#">Front page</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-menu">
+                        <h2 class="footer-wid-title">Categories</h2>
+                        <ul>
+                            <li><a href="#">Mobile Phone</a></li>
+                            <li><a href="#">Home accesseries</a></li>
+                            <li><a href="#">LED TV</a></li>
+                            <li><a href="#">Computer</a></li>
+                            <li><a href="#">Gadets</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-newsletter">
+                        <h2 class="footer-wid-title">Newsletter</h2>
+                        <p>Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
+                        <div class="newsletter-form">
+                            <form action="#">
+                                <input type="email" placeholder="Type your email">
+                                <input type="submit" value="Subscribe">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End footer top area -->
+
+    <div class="footer-bottom-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="copyright">
+                        <p>&copy; 2015 uCommerce. All Rights Reserved. <a href="http://www.freshdesignweb.com" target="_blank">freshDesignweb.com</a></p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="footer-card-icon">
+                        <i class="fa fa-cc-discover"></i>
+                        <i class="fa fa-cc-mastercard"></i>
+                        <i class="fa fa-cc-paypal"></i>
+                        <i class="fa fa-cc-visa"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End footer bottom area -->
+    <script src="/Assets/web/js/jquery.min.js"></script>
+    <script src="/Assets/web/js/bootstrap.min.js"></script>
+
+    <!-- jQuery sticky menu -->
+    <script src="/Assets/web/js/owl.carousel.min.js"></script>
+    <script src="/Assets/web/js/jquery.sticky.js"></script>
+
+    <!-- jQuery easing -->
+    <script src="/Assets/web/js/jquery.easing.1.3.min.js"></script>
+
+    <!-- Main Script -->
+    <script src="/Assets/web/js/main.js"></script>
+
+    <!-- Slider -->
+    <script type="text/javascript" src="/Assets/web/js/bxslider.min.js"></script>
+    <script type="text/javascript" src="/Assets/web/js/script.slider.js"></script>
+    <script src="~/Assets/admin/js/plugins/bootbox.min.js"></script>
+    <script src="~/Assets/web/controller/homeController.js"></script>
+    @RenderSection("ClientScript", false)
+    <script>
+        const addToCart = (catalog) => {
+            $.ajax({
+                url: '/Basket/AddToCart',
+                type: 'POST',
+                data: { catalogid: parseInt(catalog.data('id')) },
+                success: (res) => {
+                    if (res.status == 1) {
+                        bootbox.alert("Thêm vào giỏ hàng thành công!");
+                    } else if (res.status == - 1) {
+                        bootbox.alert("Bạn phải đăng nhập để sử dụng tính năng này!");
+                    } else if (res.status == 0) {
+                        bootbox.alert("Thêm vào giỏ hàng thất bại!");
+                    }
+                    setTimeout(() => {
+                        bootbox.hideAll();
+                    }, 2000);
+                },
+                error: (err) => {
+                    console.log(err);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
