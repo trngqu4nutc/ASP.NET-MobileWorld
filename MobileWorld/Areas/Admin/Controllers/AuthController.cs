@@ -13,7 +13,7 @@ namespace MobileWorld.Areas.Admin.Controllers
     {
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            var session = (LoginModel)Session[Constants.USER_SESSION];
+            var session = (UserLogin)Session[Constants.USER_SESSION];
             if(session == null || session.role == 1)
             {
                 filterContext.Result = new RedirectToRouteResult(

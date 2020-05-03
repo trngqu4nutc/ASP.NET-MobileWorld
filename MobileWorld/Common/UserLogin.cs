@@ -10,6 +10,7 @@ namespace MobileWorld.Common
     {
         public int userid { get; set; }
         public string username { get; set; }
+        public string fullname { get; set; }
         public int role { get; set; }
     }
 }

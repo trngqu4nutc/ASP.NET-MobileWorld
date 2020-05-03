@@ -50,12 +50,12 @@
                 </li>
                 <li>
                     @{
-                        var session = (MobileWorld.Models.LoginModel)Session["USER_SESSION"];
+                        var session = (MobileWorld.Common.UserLogin)Session["USER_SESSION"];
                         var text = "";
                         var name = "";
-                        if (session == null) { text = "Đăng nhập"; } else { text = "Đăng xuất"; name = session.username; }
+                        if (session == null) { text = "Đăng nhập"; } else { text = "Đăng xuất"; name = session.fullname; }
                     }
-                    <a id="login">@text</a>
+                    <a style="cursor: pointer;" id="login">@text</a>
                 </li>
             </ul>
         </div>

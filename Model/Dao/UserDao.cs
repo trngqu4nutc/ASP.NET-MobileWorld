@@ -24,10 +24,6 @@ namespace Model.Dao
         //    _context.SaveChanges();
         //    return entity.id;
         //}
-        public User GetByUserName(string username)
-        {
-            return _context.Users.SingleOrDefault(x => x.username == username);
-        }
         public UserDTO GetUserById(int id)
         {
             var user = _context.Users.Find(id);
@@ -59,19 +55,22 @@ namespace Model.Dao
                 }
             }
         }
-        public int GetRole(string username)
+        public UserDTO GetByUserName(string username)
         {
             int role = 0;
             var query = from u in _context.Users
                         join ur in _context.UserRoles on u.id equals ur.userid
                         where u.username == username
-                        select new { ur };
+                        select new { u.fullname, ur.roleid };
+            var user = new UserDTO();
             foreach(var item in query)
             {
-                if(item.ur.roleid == 3)
+                user.fullname = item.fullname;
+                if(item.roleid == 3)
                 {
                     role = 3;
-                }else if(item.ur.roleid == 2)
+                    break;
+                }else if(item.roleid == 2)
                 {
                     role = 2;
                 }
@@ -80,7 +79,8 @@ namespace Model.Dao
                     role = 1;
                 }
             }
-            return role;
+            user.role = role;
+            return user;
         }
         public bool Insert(UserDTO model)
         {
@@ -104,6 +104,22 @@ namespace Model.Dao
                 {
                     return false;
                 }
+            }
+        }
+        public int InsertFacebook(User model)
+        {
+            var user = _context.Users.SingleOrDefault(x => x.username == model.username);
+            if(user == null)
+            {
+                model.password = BcryptPass.HashPassword("facebook");
+                _context.Users.Add(model);
+                _context.SaveChanges();
+                AddRole(model.username);
+                return model.id;
+            }
+            else
+            {
+                return user.id;
             }
         }
         public bool Update(UserDTO model)
