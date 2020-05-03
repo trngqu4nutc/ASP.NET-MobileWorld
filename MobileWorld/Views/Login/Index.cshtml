@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Đăng nhập</title>
+    <link href="/Assets/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="/Assets/admin/css/sb-admin.css" rel="stylesheet">
-    <link rel="stylesheet" href="/Assets/login/style.css">
+    <link rel="stylesheet" href="/Assets/login/style1.css">
 </head>
 <body>
     <div class="loginBox">
@@ -20,8 +21,9 @@
             <input id="txtPassword" type="password" name="password" placeholder="Nhập mật khẩu">
         </form>
         <button id="btnSign" class="btn btn-primary btn-block">Đăng nhập</button>
-        <p class="txtBottom">Chưa có? <a href="/Login/Register">Đăng kí</a></p>
-        <p class="txtBottom"><a href="/">Trang chủ</a></p>
+        <a href="/Login/LoginFacebook" style="color: white;" id="btnSignFb" class="btn btn-primary btn-block"><i class="fab fa-facebook-f"></i> Đăng nhập với Facebook</a>
+        <p style="margin-top: 5px">Chưa có? <a href="/Login/Register">Đăng kí</a></p>
+        <p><a href="/">Trang chủ</a></p>
     </div>
     <script src="/Assets/admin/vendor/jquery/jquery.min.js"></script>
     <script src="/Assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

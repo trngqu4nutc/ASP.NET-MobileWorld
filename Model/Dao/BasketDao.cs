@@ -26,7 +26,6 @@ namespace Model.Dao
             return query.OrderBy(x => x.b.createdAt)
                 .Select(x => new BasketDTO()
                 {
-                    userid = x.b.userid,
                     catalogid = x.b.catalogid,
                     catalogname = x.c.name,
                     pictureuri = x.c.pictureuri,
@@ -77,6 +76,42 @@ namespace Model.Dao
                 }
             }
             return 1;
+        }
+        public bool UpdateBasket(string username, List<BasketDTO> baskets)
+        {
+            var transaction = _context.Database.BeginTransaction();
+            var userid = _context.Users.SingleOrDefault(x => x.username == username).id;
+            foreach(var basket in baskets)
+            {
+                try
+                {
+                    var model = _context.Baskets.SingleOrDefault(x => x.userid == userid && x.catalogid == basket.catalogid);
+                    model.unit = basket.unit;
+                    _context.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    return false;
+                }
+            }
+            transaction.Commit();
+            return true;
+        }
+        public bool DeleteOnCart(string username, int catalogid)
+        {
+            var userid = _context.Users.SingleOrDefault(x => x.username == username).id;
+            var basket = _context.Baskets.SingleOrDefault(x => x.userid == userid && x.catalogid == catalogid);
+            try
+            {
+                _context.Baskets.Remove(basket);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

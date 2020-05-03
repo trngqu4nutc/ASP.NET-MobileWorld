@@ -53,7 +53,7 @@
             <div class="col-md-8">
                 <div class="product-content-right">
                     <div class="woocommerce">
-                        <form method="post" action="#">
+                        <form>
                             <table cellspacing="0" class="shop_table cart">
                                 <thead>
                                     <tr>
@@ -69,8 +69,8 @@
                                 <tfoot>
                                     <tr>
                                         <td class="actions" colspan="6">
-                                            <input type="submit" value="Update Cart" name="update_cart" class="button">
-                                            <input type="submit" value="Checkout" name="proceed" class="checkout-button button alt wc-forward">
+                                            <input type="button" value="Cập nhật" id="btnUpdate" class="btnCart" />
+                                            <input type="button" value="Mua hàng" id="btnOrder" class="btnCart" />
                                         </td>
                                     </tr>
                                 </tfoot>
@@ -134,7 +134,8 @@
 <script id="data-template" type="x-tmpl-mustache">
     <tr class="cart_item">
         <td class="product-remove">
-            <a title="Remove this item" data-userid="{{userid}}" data-catalogid="{{catalogid}}" class="remove" href="#">×</a>
+            <a title="Remove this item" data-catalogid="{{catalogid}}" class="remove">×</a>
+            @*<a style="margin-top: 4px" title="Remove this item" data-userid="{{userid}}" data-catalogid="{{catalogid}}" class="remove">×</a>*@
         </td>
         <td class="product-thumbnail">
             <a href="{{pictureuri}}"><img width="145" alt="poster_1_up" class="shop_thumbnail" src="{{pictureuri}}"></a>
@@ -143,29 +144,78 @@
             <a href="/Detail/Index/{{catalogid}}">{{catalogname}}</a>
         </td>
         <td class="product-price">
-            <span class="amount">{{price}} VNĐ</span>
+            <span class="amount{{catalogid}}">{{price}} VNĐ</span>
         </td>
         <td class="product-quantity" style="padding: 0;">
             <div class="quantity buttons_added">
-                <input type="button" class="minus" value="-">
-                <input type="number" size="2" title="Qty" value="{{unit}}" min="0" step="1">
-                <input type="button" class="plus" value="+">
+                <input type="button" data-price="{{price}}" data-catalogid="{{catalogid}}" onclick="controller.changeQuantity($(this))" class="minus" value="-">
+                <input type="number" readonly size="2" title="Qty" id="quantity{{catalogid}}" value="{{unit}}" min="0" max="10" step="1">
+                <input type="button" data-price="{{price}}" data-catalogid="{{catalogid}}" onclick="controller.changeQuantity($(this), 1)" class="plus" value="+">
             </div>
         </td>
         <td class="product-subtotal">
-            <span class="amount">{{cost}} VNĐ</span>
+            <span class="cost{{catalogid}}">{{cost}} VNĐ</span>
         </td>
     </tr>
 </script>
 @section ClientScript{
     <script src="/Assets/admin/js/plugins/mustache.min.js"></script>
     <script>
-        controller = {
+        var state = [];
+        var controller = {
             init: () => {
                 controller.loadData();
             },
             registerEvent: () => {
-
+                $('#btnUpdate').off('click').on('click', function () {
+                    controller.updateBasket();
+                });
+                $('.remove').off('click').on('click', function () {
+                    controller.deleteCatalog(parseInt($(this).data('catalogid')));
+                });
+            },
+            deleteCatalog: (catalogid) => {
+                $.ajax({
+                    url: '/Basket/DeleteOnCart',
+                    type: 'GET',
+                    data: { catalogid: catalogid },
+                    dataType: 'json',
+                    success: (res) => {
+                        var msg = '';
+                        if (res.status) {
+                            msg = 'Xóa thành công!';
+                            state.splice(0, state.length);
+                            controller.loadData();
+                        } else {
+                            msg = 'Xóa thất bại!';
+                        }
+                        bootbox.alert(msg);
+                        setTimeout(() => {
+                            bootbox.hideAll();
+                        }, 1500);
+                    }
+                });
+            },
+            changeQuantity: (selector, opeator = 0) => {
+                var catalogid = selector.data('catalogid');
+                var price = parseInt(selector.data('price').split('.').join(''));
+                var quantity = parseInt($(`#quantity${catalogid}`).val());
+                if (opeator == 1) {
+                    if (quantity < 10) {
+                        $(`#quantity${catalogid}`).val(quantity += 1);
+                        $(`.cost${catalogid}`).html(formatCurrency(price * quantity) + ' VNĐ');
+                    }
+                } else {
+                    if (quantity > 1) {
+                        $(`#quantity${catalogid}`).val(quantity -= 1);
+                        $(`.cost${catalogid}`).html(formatCurrency(price * quantity) + ' VNĐ');
+                    }
+                }
+                state.forEach((item) => {
+                    if (item.catalogid == catalogid) {
+                        item.unit = quantity;
+                    }
+                });
             },
             loadData: () => {
                 $.ajax({
@@ -177,8 +227,11 @@
                         var html = '';
                         var template = $('#data-template').html();
                         $.each(res.data, function (i, item) {
+                            state.push({
+                                catalogid: item.catalogid,
+                                unit: item.unit
+                            });
                             html += Mustache.render(template, {
-                                userid: item.userid,
                                 catalogid: item.catalogid,
                                 pictureuri: item.pictureuri,
                                 catalogname: item.catalogname,
@@ -188,6 +241,7 @@
                             });
                         });
                         $('#tblData').html(html);
+                        controller.registerEvent();
                     },
                     error: (err) => {
                         console.log(err);
@@ -195,7 +249,29 @@
                 });
             },
             updateBasket: () => {
-
+                $.ajax({
+                    url: '/Basket/UpdateBasket',
+                    type: 'POST',
+                    data: {
+                        model: JSON.stringify(state)
+                    },
+                    dataType: 'json',
+                    success: (res) => {
+                        var msg = '';
+                        if (res.status) {
+                            msg = 'Cập nhật giỏ hàng thành công!';
+                        } else {
+                            msg = 'Cập nhật giỏ hàng thất bại!';
+                        }
+                        bootbox.alert(msg);
+                        setTimeout(() => {
+                            bootbox.hideAll();
+                        }, 1500);
+                    },
+                    error: (err) => {
+                        console.log(err);
+                    }
+                });
             }
         }
         controller.init();
