@@ -1,4 +1,5 @@
-﻿using Facebook;
+﻿using EmailService;
+using Facebook;
 using MobileWorld.Common;
 using MobileWorld.Models;
 using Model.Dao;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -96,6 +98,11 @@ namespace MobileWorld.Controllers
             return View();
         }
 
+        public ActionResult Forgot()
+        {
+            return View();
+        }
+
         [HttpPost]
         public JsonResult Signin(string model)
         {
@@ -149,6 +156,15 @@ namespace MobileWorld.Controllers
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             var userDTO = serializer.Deserialize<UserDTO>(model);
             var check = userDao.Insert(userDTO);
+            if (check)
+            {
+                StringBuilder content = new StringBuilder("<p> Bạn đã đăng ký tài khoản <b>");
+                content.Append(userDTO.username);
+                content.Append("</b> thành công!</p>");
+                new MailHelper().SendEmail(userDTO.email,
+                    "Chào mừng bạn đến với MobileWorld!",
+                    content.ToString());
+            }
             return Json(new
             {
                 status = check
@@ -162,6 +178,38 @@ namespace MobileWorld.Controllers
             return Json(new
             {
                 status = true
+            });
+        }
+
+        [HttpPost]
+        public JsonResult AuthAccount(string model)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            var userAuth = serializer.Deserialize<UserDTO>(model);
+            var result = new UserDao().AuthAccount(userAuth);
+            if(result.ContainsKey(1))
+            {
+                //var content = new StringBuilder("<p style=\"color: black;\">Tài khoản <b>");
+                //content.Append(userAuth.username);
+                //content.Append("</b> đã được thay đổi mật khẩu vào lúc ");
+                //content.Append(DateTime.Now.ToString() + ".</p>");
+                //content.Append("<p style=\"color: black;\">Hãy chắc chắn rằng đó là bạn và liên hệ tới hòm thư ");
+                //content.Append(ConfigurationManager.AppSettings["FromEmailAddress"].ToString());
+                //content.Append(" để biết thêm thông tin chi tiết.</p>");
+                //new MailHelper().SendEmail(userAuth.email, "Xác thực thay đổi mật khẩu!", content.ToString());
+                var password = "";
+                foreach(var item in result)
+                {
+                    password = item.Value;
+                    break;
+                }
+                new MailHelper().SendEmail(userAuth.email,
+                    "Your password has been changed.",
+                    "Password: " + password);
+            }
+            return Json(new
+            {
+                status = result.Keys
             });
         }
 

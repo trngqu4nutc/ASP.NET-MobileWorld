@@ -18,12 +18,6 @@ namespace Model.Dao
         {
             _context = new OnlineShopDbContext();
         }
-        //public int Insert(User entity)
-        //{
-        //    _context.Users.Add(entity);
-        //    _context.SaveChanges();
-        //    return entity.id;
-        //}
         public UserDTO GetUserById(int id)
         {
             var user = _context.Users.Find(id);
@@ -198,6 +192,33 @@ namespace Model.Dao
             {
                 return false;
             }
+        }
+        public Dictionary<int, string> AuthAccount(UserDTO userDTO)
+        {
+            Dictionary<int, string> result = new Dictionary<int, string>();
+            var user = _context.Users.SingleOrDefault(x => x.username == userDTO.username);
+            if(user == null)
+            {
+                result.Add(0, "");
+            }else if (!user.email.Equals(userDTO.email))
+            {
+                result.Add(-1, "");
+            }
+            else
+            {
+                var password = GeneratorPassword.Password();
+                user.password = BcryptPass.HashPassword(password);
+                try
+                {
+                    _context.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    result.Add(-2, "");
+                }
+                result.Add(1, password);
+            }
+            return result;
         }
         public PagedResult<UserDTO> ListAllPaging(string name, string status, int page, int pageSize)
         {

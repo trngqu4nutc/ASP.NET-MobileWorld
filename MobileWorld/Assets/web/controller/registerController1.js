@@ -5,10 +5,7 @@
     registerEvent: function () {
         $('#btnSign').off('click').on('click', function () {
             if (validate()) {
-                bootbox.alert("Đang đăng kí!");
-                window.setTimeout(function () {
-                    bootbox.hideAll();
-                }, 1500);
+                bootbox.alert("Đang đăng kí, vui lòng đợi trong giây lát!");
                 registerController.signUp();
             } else {
                 setTimeout(() => {
@@ -33,6 +30,7 @@
             },
             dataType: 'json',
             success: function (response) {
+                bootbox.hideAll();
                 if (response.status) {
                     bootbox.alert("Tạo tài khoản thành công!");
                     window.setTimeout(function () {
@@ -54,7 +52,6 @@
         });
     }
 }
-registerController.init();
 const validate = () => {
     let username = $('#txtUsername').val();
     let password = $('#txtPassword').val();
@@ -76,6 +73,14 @@ const validate = () => {
     } else if (email == "") {
         bootbox.alert("Hãy nhập email!");
         check = false;
+    } else if (!emailIsValid(email)) {
+        bootbox.alert("Email không hợp lệ!");
+        check = false;
     }
     return check;
 }
+const emailIsValid = (email) => {
+    check = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+    return check;
+}
+registerController.init();
