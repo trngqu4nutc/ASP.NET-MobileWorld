@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Quên mật khẩu";
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+
+<div class="loginBox">
+    <img src="/Assets/login/user.png" class="user">
+    <h2>Đăng nhập</h2>
+    <form id="formData">
+        <p>Tài khoản</p>
+        <input id="txtUsername" type="text" name="username" placeholder="Nhập tài khoản">
+        <p>Email</p>
+        <input id="txtEmail" type="text" name="email" placeholder="Nhập email">
+    </form>
+    <button id="btnSign" class="btn btn-primary btn-block">Xác nhận</button>
+    <p style="margin-top: 5px">Chưa có? <a href="/Login/Register">Đăng kí</a></p>
+    <p><a href="/Login">Đăng nhập</a></p>
+</div>
+@section  ClientScript{
+    <script src="/Assets/web/controller/forgotController.js"></script>
+}

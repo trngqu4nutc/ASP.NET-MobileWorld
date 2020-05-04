@@ -1786,11 +1786,12 @@
     <Content Include="Assets\login\background.jpg" />
     <Content Include="Assets\login\style1.css" />
     <Content Include="Assets\login\user.png" />
+    <Content Include="Assets\web\controller\forgotController.js" />
     <Content Include="Assets\web\controller\homeController.js" />
     <Content Include="Assets\web\controller\LaptopController1.js" />
     <Content Include="Assets\web\controller\loginController1.js" />
     <Content Include="Assets\web\controller\MobileController.js" />
-    <Content Include="Assets\web\controller\registerController.js" />
+    <Content Include="Assets\web\controller\registerController1.js" />
     <Content Include="Assets\web\css\bootstrap.min.css" />
     <Content Include="Assets\web\css\detail.css" />
     <Content Include="Assets\web\css\filter.css" />
@@ -1837,6 +1838,8 @@
     <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Views\Login\Forgot.cshtml" />
+    <None Include="Views\Shared\_Login.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2030,6 +2033,10 @@
     <Content Include="Views\Basket\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EmailService\EmailService.csproj">
+      <Project>{e6ca2c08-ebd2-40b7-abb9-93a1dec3861f}</Project>
+      <Name>EmailService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{b44c9dde-9847-43a3-9850-73ad8a697b8f}</Project>
       <Name>Model</Name>

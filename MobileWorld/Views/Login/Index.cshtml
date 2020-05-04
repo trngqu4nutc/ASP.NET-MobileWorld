@@ -1,33 +1,22 @@
-﻿<!doctype html>
+﻿@{
+    ViewBag.Title = "Đăng nhập";
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
 
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Đăng nhập</title>
-    <link href="/Assets/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="/Assets/admin/css/sb-admin.css" rel="stylesheet">
-    <link rel="stylesheet" href="/Assets/login/style1.css">
-</head>
-<body>
-    <div class="loginBox">
-        <img src="/Assets/login/user.png" class="user">
-        <h2>Đăng nhập</h2>
-        <form id="formData">
-            <p>Tài khoản</p>
-            <input id="txtUsername" type="text" name="username" placeholder="Nhập tài khoản">
-            <p>Mật khẩu</p>
-            <input id="txtPassword" type="password" name="password" placeholder="Nhập mật khẩu">
-        </form>
-        <button id="btnSign" class="btn btn-primary btn-block">Đăng nhập</button>
-        <a href="/Login/LoginFacebook" style="color: white;" id="btnSignFb" class="btn btn-primary btn-block"><i class="fab fa-facebook-f"></i> Đăng nhập với Facebook</a>
-        <p style="margin-top: 5px">Chưa có? <a href="/Login/Register">Đăng kí</a></p>
-        <p><a href="/">Trang chủ</a></p>
-    </div>
-    <script src="/Assets/admin/vendor/jquery/jquery.min.js"></script>
-    <script src="/Assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/Assets/admin/js/plugins/bootbox.min.js"></script>
+<div class="loginBox">
+    <img src="/Assets/login/user.png" class="user">
+    <h2>Đăng nhập</h2>
+    <form id="formData">
+        <p>Tài khoản</p>
+        <input id="txtUsername" type="text" name="username" placeholder="Nhập tài khoản">
+        <p>Mật khẩu</p>
+        <input id="txtPassword" type="password" name="password" placeholder="Nhập mật khẩu">
+    </form>
+    <button id="btnSign" class="btn btn-primary btn-block">Đăng nhập</button>
+    <a href="/Login/LoginFacebook" style="color: white;" id="btnSignFb" class="btn btn-primary btn-block"><i class="fab fa-facebook-f"></i> Đăng nhập với Facebook</a>
+    <p style="margin-top: 5px">Chưa có? <a href="/Login/Register">Đăng kí</a></p>
+    <p><a href="/Login/Forgot">Quên mật khẩu?</a></p>
+</div>
+@section  ClientScript{
     <script src="~/Assets/web/controller/loginController1.js"></script>
-</body>
-</html>
+}

@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"]</title>
+    <link href="/Assets/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/Assets/admin/css/sb-admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Assets/login/style1.css">
+</head>
+<body>
+    @RenderBody()
+    <script src="/Assets/admin/vendor/jquery/jquery.min.js"></script>
+    <script src="/Assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Assets/admin/js/plugins/bootbox.min.js"></script>
+    @RenderSection("ClientScript", false)
+</body>
+</html>
