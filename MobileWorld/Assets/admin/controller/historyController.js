@@ -2,16 +2,22 @@
     page: 1,
     pageSize: 5,
     seach: '',
-    status: 0
+    brandid: 0,
+    month: 0
 }
 controller = {
     init: () => {
         controller.loadData(true);
+        controller.loadCatalogBrands();
+        controller.registerEvent();
     },
     registerEvent: () => {
-        $('#slStatus').off('change').on('change', function () {
-            state.seach = $('#txtSeach').val();
-            state.status = $(this).val();
+        $('#slBrand').off('onchange').on('change', function () {
+            state.brandid = parseInt($(this).val());
+            controller.loadData(true);
+        });
+        $('#slMonth').off('onchange').on('change', function () {
+            state.month = parseInt($(this).val());
             controller.loadData(true);
         });
         $('#btnSeach').off('click').on('click', function () {
@@ -19,13 +25,17 @@ controller = {
             controller.loadData(true);
         });
         $('#btnReset').off('click').on('click', function () {
-            controller.resetState();
+            controller.reset();
             controller.loadData(true);
         });
-        $('.btnDelete').off('click').on('click', function () {
-            var id = $(this).data('id');
+        $('#btnDeleteAll').off('click').on('click', function () {
+            let ids = []
+            var data = $('#tblData > tr > td > button');
+            $.each(data, (i, item) => {
+                ids.push(parseInt(item.attributes[0].value));
+            });
             bootbox.confirm({
-                message: "<h5>Xóa đơn hàng này?</h5>",
+                message: "<h5>Xóa các đơn hàng này?</h5>",
                 buttons: {
                     confirm: {
                         label: "Yes",
@@ -38,120 +48,132 @@ controller = {
                 },
                 callback: function (result) {
                     if (result) {
-                        controller.deleteBill(id);
+                        controller.deleteAllHistory(ids);
                     }
                 }
             });
         });
-        $('.btnAccept').off('click').on('click', function () {
-            var id = $(this).data('id');
-            var status = $(this).data('status');
-            if (status == 0) {
-                bootbox.confirm({
-                    message: "<h5>Duyệt đơn hàng này?</h5>",
-                    buttons: {
-                        confirm: {
-                            label: "Yes",
-                            className: "btn btn-success"
-                        },
-                        cancel: {
-                            label: "Cancel",
-                            className: "btn btn-danger"
-                        }
-                    },
-                    callback: function (result) {
-                        if (result) {
-                            controller.updateBill(id, 1);
-                        }
-                    }
-                });
-            }
-        });
     },
-    updateBill: (id, status) => {
-        var model = {
-            id: id,
-            status: status
-        }
+    deleteAllHistory: (ids) => {
         $.ajax({
-            url: '/Bill/UpdateBill',
-            type: 'POST',
-            data: { model: JSON.stringify(model) },
+            url: '/History/DeleteAllHistory',
+            type: 'GET',
+            data: { ids: JSON.stringify(ids) },
             dataType: 'json',
             success: (res) => {
-                var msg = '';
+                let msg = '';
                 if (res.status) {
-                    msg = 'Duyệt đơn hàng thành công!';
+                    msg = 'Xóa thành công!';
                     controller.loadData(true);
                 } else {
-                    msg = 'Không thể duyệt đơn hàng này!'
+                    msg = 'Xóa không thành công!';
                 }
                 bootbox.alert(msg);
                 setTimeout(() => {
                     bootbox.hideAll();
-                }, 2000);
+                }, 1500);
             },
             error: (err) => {
                 console.log(err);
             }
         });
     },
-    deleteBill: (id) => {
+    deleteHistory: (id) => {
         $.ajax({
-            url: '/Bill/DeleteBill',
+            url: '/History/DeleteHistory',
             type: 'GET',
             data: { id: id },
             dataType: 'json',
             success: (res) => {
-                var msg = '';
+                let msg = '';
                 if (res.status) {
                     msg = 'Xóa thành công!';
                     controller.loadData(true);
                 } else {
-                    msg = 'Xóa thất bại!';
+                    msg = 'Xóa không thành công!';
                 }
                 bootbox.alert(msg);
                 setTimeout(() => {
                     bootbox.hideAll();
-                }, 2000);
+                }, 1500);
+            },
+            error: (err) => {
+                console.log(err);
             }
         });
     },
     loadData: (changePageSize) => {
         $.ajax({
-            url: '/Bill/LoadData',
+            url: '/History/GetAll',
             type: 'GET',
             data: {
                 seach: state.seach,
-                status: state.status,
+                month: state.month,
                 page: state.page,
+                brandid: state.brandid,
                 pageSize: state.pageSize
             },
             dataType: 'json',
             success: (res) => {
-                var html = '';
-                var template = $('#data-template').html();
-                $.each(res.data, function (i, item) {
+                let html = '';
+                let template = $('#data-template').html();
+                $.each(res.data, (i, item) => {
                     html += Mustache.render(template, {
                         id: item.id,
-                        username: item.username,
                         name: item.name,
-                        pictureuri: item.pictureuri,
+                        brand: item.brand,
+                        inputprice: formatCurrency(item.inputprice),
                         unit: item.unit,
-                        cost: formatCurrency(item.unit * item.price),
-                        status: item.status,
-                        style: setStatus(item.status).colorStyle,
-                        textStatus: setStatus(item.status).textStatus
+                        cost: formatCurrency(item.inputprice * item.unit),
+                        createdAt: item.createdAt
                     });
                 });
                 $('#tblData').html(html);
-                controller.registerEvent();
+                $('.btnDelete').off('click').on('click', function () {
+                    var id = $(this).data('id');
+                    bootbox.confirm({
+                        message: "<h5>Xóa đơn hàng này?</h5>",
+                        buttons: {
+                            confirm: {
+                                label: "Yes",
+                                className: "btn btn-success"
+                            },
+                            cancel: {
+                                label: "Cancel",
+                                className: "btn btn-danger"
+                            }
+                        },
+                        callback: function (result) {
+                            if (result) {
+                                controller.deleteHistory(id);
+                            }
+                        }
+                    });
+                });
                 controller.paging(res.totalRow, changePageSize);
             },
             error: (err) => {
                 console.log(err);
             }
         });
+    },
+    loadCatalogBrands: function () {
+        $.ajax({
+            url: '/Catalog/GetAllBrand',
+            type: 'GET',
+            data: {},
+            dataType: 'json',
+            success: (res) => {
+                if (res.brands != null) {
+                    $.each(res.brands, function (i, item) {
+                        $('#slBrand').append(`<option value="${item.id}">${item.brand}</option>`);
+                    });
+                }
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        })
     },
     paging: function (totalRow, changePageSize) {
         var totalPage = Math.ceil(totalRow / state.pageSize);
@@ -180,38 +202,18 @@ controller = {
             }
         });
     },
-    resetState: function () {
+    reset: () => {
         $('#txtSeach').val('');
-        $('#slStatus').val('0');
-        state.status = 0;
+        $('#slBrand').val('0');
+        $('#slMonth').val('0');
+        state.page = 1;
+        state.brandid = 0;
         state.seach = '';
+        state.month = 0;
     }
 }
 controller.init();
-const setStatus = (status) => {
-    if (status == -1) {
-        return {
-            colorStyle: 'danger',
-            textStatus: 'Đã hủy'
-        }
-    } else if (status == 0) {
-        return {
-            colorStyle: 'primary',
-            textStatus: 'Duyệt'
-        }
-    } else if (status == 1) {
-        return {
-            colorStyle: 'infor',
-            textStatus: 'Đã duyệt'
-        }
-    } else if (status == 2) {
-        return {
-            colorStyle: 'success',
-            textStatus: 'Đã bán'
-        }
-    }
-}
-function formatCurrency(n, separate = ".") {
+const formatCurrency = (n, separate = ".") => {
     var s = n.toString();
     var regex = /\B(?=(\d{3})+(?!\d))/g;
     var ret = s.replace(regex, separate);

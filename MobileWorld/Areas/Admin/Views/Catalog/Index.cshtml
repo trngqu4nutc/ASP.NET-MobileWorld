@@ -14,7 +14,6 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <i class="fas fa-table"></i>
-                        Data Table Example
                     </div>
                     <div class="col-lg-4">
                         <div class="fa-pull-right">
@@ -23,7 +22,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="row">
-                            <div class="">
+                            <div class="ml-1">
                                 <select id="slBrand" class="form-control">
                                     <option value="0">Hãng</option>
                                 </select>
@@ -48,7 +47,6 @@
                             <tr>
                                 <th>Sản phẩm</th>
                                 <th>Ảnh</th>
-                                <th>Mô tả ngắn</th>
                                 <th>Giá</th>
                                 <th>Màn hình</th>
                                 <th>Ram</th>
@@ -71,7 +69,6 @@
     <tr>
         <td>{{name}}</td>
         <td><img width="100" src="{{pictureuri}}" /></td>
-        <td>{{description}}</td>
         <td>{{{price}}}</td>
         <td>{{screen}}</td>
         <td>{{ram}}</td>
@@ -281,7 +278,7 @@
 
 @section ClientScript
 {
-    <script src="/Assets/admin/controller/catalogController1.js"></script>
+    <script src="/Assets/admin/controller/catalogController.js"></script>
 }
 
 

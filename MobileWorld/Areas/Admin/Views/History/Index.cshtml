@@ -1,11 +1,11 @@
 ﻿
 @{
-    ViewBag.Title = "Quản lý đơn hàng";
+    ViewBag.Title = "Lịch sử nhập hàng";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 @section header{
-    Danh sách đơn hàng.
+    Đơn hàng nhập.
 }
 
 <div class="row">
@@ -18,17 +18,14 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="fa-pull-right">
-                            <input type="text" class="form-control" id="txtSeach" name="seachUser" placeholder="Nhập tài khoản" />
+                            <input type="text" class="form-control" id="txtSeach" name="" placeholder="Nhập tên sản phẩm" />
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="row">
                             <div class="ml-1">
-                                <select id="slStatus" class="form-control">
-                                    <option value="0">Chờ duyệt</option>
-                                    <option value="-1">Đã hủy</option>
-                                    <option value="1">Đã duyệt</option>
-                                    <option value="2">Đã bán</option>
+                                <select id="slBrand" class="form-control">
+                                    <option value="0">Hãng</option>
                                 </select>
                             </div>
                             <div class="ml-1">
@@ -62,14 +59,13 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Khách hàng</th>
                                 <th style="width: 210px;">Tên sản phẩm</th>
+                                <th>Hãng</th>
+                                <th>Giá nhập</th>
                                 <th>Số lượng</th>
                                 <th>Đơn giá</th>
-                                <th>Địa chỉ</th>
-                                <th>Ngày đặt</th>
-                                <th>Trạng thái</th>
-                                <th>Thao tác</th>
+                                <th>Ngày nhập</th>
+                                <th><button id="btnDeleteAll" class="btn btn-warning" style="margin-left: 15%"><i class="fas fa-trash-alt"></i> Tất cả</button></th>
                             </tr>
                         </thead>
                         <tbody id="tblData"></tbody>
@@ -85,55 +81,18 @@
 <script id="data-template" type="x-tmpl-mustache">
     <tr>
         <td>{{id}}</td>
-        <td>{{username}}</td>
         <td>{{name}}</td>
+        <td>{{brand}}</td>
+        <td>{{inputprice}} VNĐ</td>
         <td>{{unit}}</td>
         <td>{{cost}} VNĐ</td>
-        <td>{{shiptoaddress}}</td>
         <td>{{createdAt}}</td>
-        <td><button data-id="{{id}}" data-status="{{status}}" class="btnAccept btn btn-sm btn-{{style}}">{{textStatus}}</button></td>
         <td>
-            <button data-id="{{id}}" class="btnDelete btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
+            <button data-id="{{id}}" class="btnDelete btn btn-sm btn-danger" style="margin-left: 35%"><i class="fas fa-trash-alt"></i></button>
         </td>
     </tr>
 </script>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thông tin</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="formData" class="form-group">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="brand">Tên hãng:</label>
-                                <input id="brand" type="text" name="brand" class="form-control" />
-                                <input id="id" type="hidden" value="0" />
-                            </div>
-                            <div class="form-group pass">
-                                <label for="pictureurl">Link logo:</label>
-                                <input id="pictureurl" type="text" name="pictureurl" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="btnCancel" class="btn btn-secondary">Hủy</button>
-                <button type="button" id="btnSave" class="btn btn-primary">Lưu</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-@section ClientScript
-{
-    <script src="/Assets/admin/controller/billController1.js"></script>
+@section ClientScript{
+    <script src="/Assets/admin/controller/historyController.js"></script>
 }
-

@@ -1,5 +1,4 @@
 ﻿using Model.Dao;
-using Model.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +8,17 @@ using System.Web.Script.Serialization;
 
 namespace MobileWorld.Areas.Admin.Controllers
 {
-    public class BillController : AuthController
+    public class HistoryController : AuthController
     {
-        // GET: Admin/Bill
+        // GET: Admin/History
         public ActionResult Index()
         {
             return View();
         }
         [HttpGet]
-        public JsonResult LoadData(string seach, int status, int month, int page, int pageSize)
+        public JsonResult GetAll(string seach, int brandid, int month, int page, int pageSize)
         {
-            var result = new BillDao().LoadData(seach, status, month, page, pageSize);
+            var result = new HistoryDao().GetAll(seach, brandid, month, page, pageSize);
             return Json(new
             {
                 totalRow = result.TotalRecord,
@@ -27,20 +26,19 @@ namespace MobileWorld.Areas.Admin.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
-        public JsonResult DeleteBill(int id)
+        public JsonResult DeleteHistory(int id)
         {
-            var check = new BillDao().DeleteBill(id);
+            var check = new HistoryDao().DeleteHistory(id);
             return Json(new
             {
                 status = check
             }, JsonRequestBehavior.AllowGet);
         }
-        [HttpPost]
-        public JsonResult UpdateBill(string model)
+        [HttpGet]
+        public JsonResult DeleteAllHistory(string ids)
         {
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            var bill = serializer.Deserialize<BillDTO>(model);
-            var check = new BillDao().UpdateBill(bill.id, bill.status);
+            var listId = new JavaScriptSerializer().Deserialize<List<int>>(ids);
+            var check = new HistoryDao().DeleteHistorys(listId);
             return Json(new
             {
                 status = check

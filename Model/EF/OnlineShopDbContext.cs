@@ -17,6 +17,8 @@ namespace Model.EF
         public virtual DbSet<CatalogBrand> CatalogBrands { get; set; }
         public virtual DbSet<Catalog> Catalogs { get; set; }
         public virtual DbSet<CatalogType> CatalogTypes { get; set; }
+        public virtual DbSet<History> Histories { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Specification> Specifications { get; set; }
         public virtual DbSet<SpecificationsLaptop> SpecificationsLaptops { get; set; }
@@ -26,6 +28,10 @@ namespace Model.EF
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Bill>()
+                .HasOptional(e => e.Notification)
+                .WithRequired(e => e.Bill)
+                .WillCascadeOnDelete();
         }
     }
 }
