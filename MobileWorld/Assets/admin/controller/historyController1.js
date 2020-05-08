@@ -116,6 +116,7 @@ controller = {
             dataType: 'json',
             success: (res) => {
                 let html = '';
+                $('#total').html(`Tổng đơn hàng: ${res.totalRow}.`)
                 let template = $('#data-template').html();
                 $.each(res.data, (i, item) => {
                     html += Mustache.render(template, {

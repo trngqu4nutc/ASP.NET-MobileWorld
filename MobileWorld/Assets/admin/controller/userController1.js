@@ -168,6 +168,7 @@ var homeController = {
                 if (response.status) {
                     var data = response.data;
                     var html = '';
+                    $('#total').html(`Tổng số người dùng: ${response.totalRow}.`);
                     var template = $('#data-template').html();
                     $.each(data, function (i, item) {
                         html += Mustache.render(template, {

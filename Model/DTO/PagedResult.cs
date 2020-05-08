@@ -10,5 +10,6 @@ namespace Model.DTO
     {
         public List<T> Items { get; set; }
         public int TotalRecord { get; set; }
+        public double Total { get; set; }
     }
 }

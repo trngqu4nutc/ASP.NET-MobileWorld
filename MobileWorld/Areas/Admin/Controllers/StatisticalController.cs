@@ -24,6 +24,7 @@ namespace MobileWorld.Areas.Admin.Controllers
             var result = new StatisticalDao().GetAllCatalog(seach, brandid, month, page, pageSize);
             return Json(new
             {
+                totalMoney = result.Total,
                 totalRow = result.TotalRecord,
                 data = result.Items
             }, JsonRequestBehavior.AllowGet);
