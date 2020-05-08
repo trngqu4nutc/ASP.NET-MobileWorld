@@ -297,6 +297,7 @@ var homeController = {
                 if (response.data != null) {
                     var data = response.data;
                     var html = '';
+                    $('#total').html(`Tổng số sản phẩm: ${response.totalRow}.`)
                     var template = $('#data-template').html();
                     $.each(data, function (i, item) {
                         html += Mustache.render(template, {

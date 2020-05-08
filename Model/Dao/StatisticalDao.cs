@@ -36,6 +36,7 @@ namespace Model.Dao
             }
             var result = new PagedResult<StcatalogDTO>();
             result.TotalRecord = listResult.Count;
+            result.Total = Convert.ToDouble(listResult.Sum(x => x.cost));
             result.Items = listResult.OrderByDescending(x => x.createdAt)
                 .Skip((page - 1) * pageSize).Take(pageSize).ToList();
             return result;
@@ -66,6 +67,7 @@ namespace Model.Dao
                             {
                                 id = x.id,
                                 brandid = x.brandid,
+                                catalogid = x.catalogid,
                                 name = x.name,
                                 brand = x.brand,
                                 quantity = x.quantity,
@@ -77,7 +79,8 @@ namespace Model.Dao
             var result = new List<StcatalogDTO>();
             foreach (var item in query)
             {
-                var element = item.model.ToList()[0];
+                int i = item.model.Count() - 1;
+                var element = item.model.ToList()[i];
                 var inputprice = _context.Histories.FirstOrDefault(x => x.catalogid == item.catalogid).inputprice;
                 element.unit = item.count;
                 element.cost = (element.cost - inputprice) * element.unit;
@@ -110,6 +113,7 @@ namespace Model.Dao
                             model = cb.Select(x => new StcatalogDTO()
                             {
                                 id = x.id,
+                                catalogid = x.catalogid,
                                 brandid = x.brandid,
                                 name = x.name,
                                 brand = x.brand,
@@ -122,7 +126,8 @@ namespace Model.Dao
             var result = new List<StcatalogDTO>();
             foreach (var item in query)
             {
-                var element = item.model.ToList()[0];
+                int i = item.model.Count() - 1;
+                var element = item.model.ToList()[i];
                 var inputprice = _context.Histories.FirstOrDefault(x => x.catalogid == item.catalogid).inputprice;
                 element.unit = item.count;
                 element.cost = (element.cost - inputprice) * element.unit;

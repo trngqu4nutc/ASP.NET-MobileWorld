@@ -19,8 +19,19 @@ namespace Model.Dao
         {
             var bill = _context.Bills.Find(id);
             bill.status = status;
+            var notifi = new Notification()
+            {
+                billid = bill.id,
+                userid = bill.userid,
+                title = "Đơn hàng đã được xác nhận.",
+                content = "Đơn hàng mã số " + bill.id.ToString() + " đã được xác nhận.",
+                status = 0,
+                createdAt = DateTime.Now,
+                updatedAt = DateTime.Now
+            };
             try
             {
+                _context.Notifications.Add(notifi);
                 _context.SaveChanges();
             }
             catch (Exception)

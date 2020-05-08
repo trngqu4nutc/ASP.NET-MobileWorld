@@ -175,11 +175,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\admin\controller\billController1.js" />
+    <Content Include="Assets\admin\controller\billController.js" />
     <Content Include="Assets\admin\controller\brandController.js" />
-    <Content Include="Assets\admin\controller\catalogController.js" />
-    <Content Include="Assets\admin\controller\historyController.js" />
-    <Content Include="Assets\admin\controller\userController.js" />
+    <Content Include="Assets\admin\controller\catalogController1.js" />
+    <Content Include="Assets\admin\controller\historyController1.js" />
+    <Content Include="Assets\admin\controller\statisticalController.js" />
+    <Content Include="Assets\admin\controller\userController1.js" />
     <Content Include="Assets\admin\css\navbar.css" />
     <Content Include="Assets\admin\css\pagination.css" />
     <Content Include="Assets\admin\css\sb-admin.css" />
@@ -1857,7 +1858,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
