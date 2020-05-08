@@ -74,6 +74,8 @@
     <Compile Include="Dao\BillDao.cs" />
     <Compile Include="Dao\BrandDao.cs" />
     <Compile Include="Dao\CatalogDao.cs" />
+    <Compile Include="Dao\HistoryDao.cs" />
+    <Compile Include="Dao\StatisticalDao.cs" />
     <Compile Include="DTO\BasketDTO.cs" />
     <Compile Include="DTO\BillDTO.cs" />
     <Compile Include="DTO\BrandDTO.cs" />
@@ -85,11 +87,15 @@
     <Compile Include="DTO\CatalogTypeDTO.cs" />
     <Compile Include="DTO\LaptopDTO.cs" />
     <Compile Include="DTO\MobileDTO.cs" />
+    <Compile Include="DTO\StatisticalDTO.cs" />
+    <Compile Include="DTO\StcatalogDTO.cs" />
     <Compile Include="EF\Basket.cs" />
     <Compile Include="EF\Bill.cs" />
     <Compile Include="EF\Catalog.cs" />
     <Compile Include="EF\CatalogBrand.cs" />
     <Compile Include="EF\CatalogType.cs" />
+    <Compile Include="EF\History.cs" />
+    <Compile Include="EF\Notification.cs" />
     <Compile Include="EF\OnlineShopDbContext.cs" />
     <Compile Include="EF\Role.cs" />
     <Compile Include="EF\Specification.cs" />
@@ -101,6 +107,7 @@
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="Util\BasketMapper.cs" />
     <Compile Include="Util\CatalogMapper.cs" />
+    <Compile Include="Util\DateOnYear.cs" />
     <Compile Include="Util\UserMapper.cs" />
   </ItemGroup>
   <ItemGroup>

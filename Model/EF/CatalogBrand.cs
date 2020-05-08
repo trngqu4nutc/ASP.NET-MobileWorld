@@ -18,12 +18,13 @@ namespace Model.EF
 
         [StringLength(100)]
         public string brand { get; set; }
-        [StringLength(100)]
-        public string pictureurl { get; set; }
 
         public DateTimeOffset? createdAt { get; set; }
 
         public DateTimeOffset? updatedAt { get; set; }
+
+        [StringLength(100)]
+        public string pictureurl { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Catalog> Catalogs { get; set; }

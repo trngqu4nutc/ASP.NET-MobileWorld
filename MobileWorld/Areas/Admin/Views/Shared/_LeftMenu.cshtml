@@ -5,32 +5,38 @@
             <span>Trang chủ</span>
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/Admin/User">
+            <i class="fas fa-user"></i>
+            <span>Người dùng</span>
+        </a>
+    </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-tasks"></i>
             <span>Danh mục</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            @Html.ActionLink("Người dùng", "Index", "User", null, new { @class = "dropdown-item" })
             <a class="dropdown-item" href="/Admin/Catalog">Sản phẩm</a>
             <a class="dropdown-item" href="/Admin/Brand">Hãng</a>
         </div>
     </li>
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-user"></i>
-            <span>Tài khoản</span>
+    <li class="nav-item">
+        <a class="nav-link" href="/Admin/History">
+            <i class="far fa-plus-square"></i>
+            <span>Quản lý nhập hàng</span>
         </a>
-        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="login.html">Login</a>
-            <a class="dropdown-item" href="register.html">Register</a>
-            <a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
-        </div>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="/Admin/Bill">
             <i class="fas fa-shopping-cart"></i>
             <span>Quản lý đơn hàng</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/Admin/Statistical?name=san-pham">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Doanh thu</span>
         </a>
     </li>
 </ul>

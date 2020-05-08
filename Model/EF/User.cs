@@ -52,6 +52,9 @@ namespace Model.EF
 
         public int? gender { get; set; }
 
+        [StringLength(255)]
+        public string avatar { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Basket> Baskets { get; set; }
 

@@ -15,7 +15,6 @@
                 <div class="row">
                     <div class="col-md-6">
                         <i class="fas fa-table"></i>
-                        Data Table Example
                     </div>
                     <div class="col-md-4">
                         <div class="fa-pull-right">
@@ -36,7 +35,7 @@
                                 <th>Id</th>
                                 <th>Tên hãng</th>
                                 <th>Logo</th>
-                                <th><button id="btnAdd" class="btn btn-success"><i class="fas fa-user-plus"></i></button></th>
+                                <th><button style="margin-left: 35%" id="btnAdd" class="btn btn-success"><i class="far fa-plus-square"></i></button></th>
                             </tr>
                         </thead>
                         <tbody id="tblData"></tbody>
@@ -55,7 +54,7 @@
         <td>{{brand}}</td>
         <td><img src="{{pictureurl}}" /></td>
         <td>
-            <button data-id="{{id}}" class="btnEdit btn btn-sm btn-info"><i class="fas fa-edit"></i></button>
+            <button style="margin-left: 28%" data-id="{{id}}" class="btnEdit btn btn-sm btn-info"><i class="fas fa-edit"></i></button>
             <button data-id="{{id}}" class="btnDelete btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
         </td>
     </tr>

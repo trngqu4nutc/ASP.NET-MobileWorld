@@ -156,7 +156,9 @@
     <Compile Include="Areas\Admin\Controllers\BillController.cs" />
     <Compile Include="Areas\Admin\Controllers\BrandController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatalogController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HistoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StatisticalController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\UserLogin.cs" />
@@ -173,9 +175,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\admin\controller\billController.js" />
+    <Content Include="Assets\admin\controller\billController1.js" />
     <Content Include="Assets\admin\controller\brandController.js" />
-    <Content Include="Assets\admin\controller\catalogController1.js" />
+    <Content Include="Assets\admin\controller\catalogController.js" />
+    <Content Include="Assets\admin\controller\historyController.js" />
     <Content Include="Assets\admin\controller\userController.js" />
     <Content Include="Assets\admin\css\navbar.css" />
     <Content Include="Assets\admin\css\pagination.css" />
@@ -1839,6 +1842,9 @@
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Views\Login\Forgot.cshtml" />
+    <Content Include="Areas\Admin\Views\Statistical\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\History\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Statistical\Customer.cshtml" />
     <None Include="Views\Shared\_Login.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

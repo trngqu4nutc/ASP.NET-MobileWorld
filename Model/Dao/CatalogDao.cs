@@ -44,7 +44,6 @@ namespace Model.Dao
                 {
                     id = x.c.id,
                     cpu = x.sp.cpu,
-                    description = x.c.description,
                     name = x.c.name,
                     os = x.sp.os,
                     pictureuri = x.c.pictureuri,
@@ -340,10 +339,18 @@ namespace Model.Dao
                     return false;
                 }
                 catalogDTO.id = _context.Catalogs.SingleOrDefault(x => x.name == catalogDTO.name).id;
+                var history = new History() {
+                    catalogid = catalogDTO.id,
+                    unit = catalogDTO.quantity,
+                    inputprice = catalogDTO.price,
+                    createdAt = DateTime.Now,
+                    updatedAt = DateTime.Now
+                };
                 var specification = new Specification();
                 specification = CatalogMapper.toSpecification(catalogDTO, specification);
                 try
                 {
+                    _context.Histories.Add(history);
                     _context.Specifications.Add(specification);
                     _context.SaveChanges();
                     return true;
@@ -357,6 +364,39 @@ namespace Model.Dao
             else
             {
                 var catalog = _context.Catalogs.Find(catalogDTO.id);
+                var history = _context.Histories.FirstOrDefault(x => x.catalogid == catalog.id);
+                if(history != null)
+                {
+                    if (catalogDTO.quantity > catalog.quantity)
+                    {
+                        int unit = catalogDTO.quantity - catalog.quantity;
+                        var newHistory = new History()
+                        {
+                            catalogid = history.catalogid,
+                            inputprice = history.inputprice,
+                            unit = unit,
+                            createdAt = DateTime.Now,
+                            updatedAt = DateTime.Now
+                        };
+                        _context.Histories.Add(newHistory);
+                    }
+                }
+                else
+                {
+                    if (catalogDTO.quantity > catalog.quantity)
+                    {
+                        int unit = catalogDTO.quantity - catalog.quantity;
+                        var newHistory = new History()
+                        {
+                            catalogid = catalog.id,
+                            inputprice = catalog.price - Convert.ToDecimal(0.05 * Convert.ToDouble(catalog.price)),
+                            unit = unit,
+                            createdAt = DateTime.Now,
+                            updatedAt = DateTime.Now
+                        };
+                        _context.Histories.Add(newHistory);
+                    }
+                }
                 var specification = _context.Specifications.SingleOrDefault(x => x.catalogid == catalogDTO.id);
                 catalog = CatalogMapper.toCatalog(catalogDTO, catalog);
                 specification = CatalogMapper.toSpecification(catalogDTO, specification);

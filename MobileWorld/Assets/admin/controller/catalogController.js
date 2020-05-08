@@ -303,7 +303,6 @@ var homeController = {
                             id: item.id,
                             name: item.name,
                             pictureuri: item.pictureuri,
-                            description: item.description,
                             price: item.price,
                             screen: item.screen,
                             ram: item.ram,

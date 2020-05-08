@@ -15,5 +15,7 @@ namespace Model.DTO
         public string name { get; set; }
         public int status { get; set; }
         public string username { get; set; }
+        public string shiptoaddress { get; set; }
+        public string createdAt { get; set; }
     }
 }
