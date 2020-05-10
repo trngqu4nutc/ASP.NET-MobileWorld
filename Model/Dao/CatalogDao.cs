@@ -20,11 +20,22 @@ namespace Model.Dao
             _context = new OnlineShopDbContext();
         }
 
-        public PagedResult<CatalogDTO> GetAll(string name, int idbrand, int idtype, int page, int pageSize)
+        public PagedResult<CatalogDTO> GetAll(string name, int idbrand, int idtype, int status, int page, int pageSize)
         {
             var query = from c in _context.Catalogs
                         join sp in _context.Specifications on c.id equals sp.catalogid
                         select new { c, sp };
+            if(status < 2)
+            {
+                if(status == 1)
+                {
+                    query = query.Where(x => x.c.status == true);
+                }
+                else
+                {
+                    query = query.Where(x => x.c.status == false);
+                }
+            }
             if (!string.IsNullOrEmpty(name))
             {
                 query = query.Where(x => x.c.name.Contains(name));
@@ -49,6 +60,7 @@ namespace Model.Dao
                     pictureuri = x.c.pictureuri,
                     price = x.c.price,
                     quantity = x.c.quantity,
+                    status = x.c.status,
                     ram = x.sp.ram,
                     screen = x.sp.screen
                 }).ToList();
@@ -419,48 +431,17 @@ namespace Model.Dao
             {
                 return false;
             }
-            DbContextTransaction transaction = _context.Database.BeginTransaction();
-            if(catalog.catalogtypeid == 1)
-            {
-                var mobile = _context.SpecificationsMobiles.SingleOrDefault(x => x.catalogid == catalog.id);
-                try
-                {
-                    _context.SpecificationsMobiles.Remove(mobile);
-                    _context.SaveChanges();
-                }
-                catch (Exception)
-                {
-                    transaction.Rollback();
-                    return false;
-                }
-            }else if(catalog.catalogtypeid == 2)
-            {
-                var laptop = _context.SpecificationsLaptops.SingleOrDefault(x => x.catalogid == catalog.id);
-                try
-                {
-                    _context.SpecificationsLaptops.Remove(laptop);
-                    _context.SaveChanges();
-                }
-                catch (Exception)
-                {
-                    transaction.Rollback();
-                    return false;
-                }
-            }
-            var specifications = _context.Specifications.SingleOrDefault(x => x.catalogid == catalog.id);
+            catalog.status = !catalog.status;
+            catalog.updatedAt = DateTime.Now;
             try
             {
-                _context.Specifications.Remove(specifications);
-                _context.Catalogs.Remove(catalog);
                 _context.SaveChanges();
-                transaction.Commit();
-                return true;
             }
             catch (Exception)
             {
-                transaction.Rollback();
                 return false;
             }
+            return true;
         }
         public List<Catalog> LoadLatest()
         {
@@ -472,9 +453,9 @@ namespace Model.Dao
         }
         public PagedResult<CatalogDTO> LoadHomeMobile(int type, int cost, string brand, int index)
         {
-            var query = _context.Catalogs.Where(x => x.catalogtypeid == type);
+            var query = _context.Catalogs.Where(x => x.catalogtypeid == type && x.status == true);
             var result = new PagedResult<CatalogDTO>();
-            if(brand != "[]")
+            if(!brand.Equals("[]"))
             {
                 query = query.Where(x => brand.Contains(x.catalogbrandid.ToString()));
             }

@@ -168,6 +168,7 @@
     <Compile Include="Controllers\HomeCatalogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -177,7 +178,7 @@
   <ItemGroup>
     <Content Include="Assets\admin\controller\billController.js" />
     <Content Include="Assets\admin\controller\brandController.js" />
-    <Content Include="Assets\admin\controller\catalogController1.js" />
+    <Content Include="Assets\admin\controller\catalogController2.js" />
     <Content Include="Assets\admin\controller\historyController1.js" />
     <Content Include="Assets\admin\controller\statisticalController.js" />
     <Content Include="Assets\admin\controller\userController1.js" />
@@ -1800,6 +1801,7 @@
     <Content Include="Assets\web\css\detail.css" />
     <Content Include="Assets\web\css\filter.css" />
     <Content Include="Assets\web\css\font-awesome.min.css" />
+    <Content Include="Assets\web\css\mestyle.css" />
     <Content Include="Assets\web\css\navbar.css" />
     <Content Include="Assets\web\css\owl.carousel.css" />
     <Content Include="Assets\web\css\responsive.css" />
@@ -1846,6 +1848,7 @@
     <Content Include="Areas\Admin\Views\Statistical\Index.cshtml" />
     <Content Include="Areas\Admin\Views\History\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Statistical\Customer.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
     <None Include="Views\Shared\_Login.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

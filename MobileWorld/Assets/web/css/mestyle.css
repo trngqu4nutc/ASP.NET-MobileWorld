@@ -1,0 +1,530 @@
+﻿﻿@import url('https://fonts.googleapis.com/css2?family=Srisakdi:wght@700&display=swap');
+a:hover {
+    text-decoration: none !important;
+    color: #808080;
+}
+
+.mynavbar {
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to bottom,#f53e2d,#fe6533);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .mynavbar #search::placeholder {
+        color: #bbbbbb;
+        font-size: 14px;
+    }
+
+.navlinks {
+    list-style: none;
+    display: flex;
+    margin: 8px 20px 0 0;
+    flex-direction: column;
+}
+
+a.logo {
+    font-family: 'Srisakdi', cursive;
+}
+
+a.myactive {
+    font-size: 30px;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0 30px;
+    transition: 0.3s;
+}
+
+    a.myactive:hover {
+        color: #eee;
+    }
+
+.navlinks a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    margin: 0 10px;
+    transition: 0.3s;
+}
+
+    .navlinks a:hover {
+        color: #eee;
+    }
+
+.search-container {
+    width: 40%;
+    z-index: 1;
+    margin-top: 20px;
+}
+
+    .search-container form {
+        width: 100%;
+        background: #fff;
+        height: 40px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+        .search-container form input[type='text'] {
+            height: 38px;
+            width: 100%;
+            outline: none;
+            border: none;
+            padding: 0 4px;
+            border-radius: 4px;
+            font-size: 20px;
+        }
+
+        .search-container form button[type='submit'] {
+            color: #fff;
+            background: #fe6533;
+            outline: none;
+            border-radius: 4px;
+            border: none;
+            height: 35px;
+            margin: 3px 2px 0 0;
+            padding: 0 30px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+@media only screen and (max-width: 1050px) {
+    .navlinks a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 16px;
+        font-weight: normal;
+    }
+}
+
+@media only screen and (max-width: 876px) {
+    .mynavbar .active {
+        font-size: 20px;
+    }
+
+    .search-container form button[type='submit'] {
+        padding: 0 10px;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    background: #eee;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom,#f53e2d,#fe6533);
+    min-height: 100px;
+}
+
+.mystyleul {
+    margin-top: 10px;
+    display: flex;
+    list-style: none;
+    font-size: 16px;
+}
+
+    .mystyleul a {
+        color: #eee;
+        margin: 10px;
+    }
+
+.greeting {
+    font-size: 14px !important;
+    position: absolute;
+    top: 0;
+    right: 50px;
+}
+
+.product-upper {
+    width: 230px;
+    border: 1px solid #ccc;
+    padding: 20px 0;
+}
+
+
+/*style specifications*/
+.parameter {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    list-style: none;
+}
+
+    .parameter li {
+        display: table;
+        background: #fff;
+        width: 100%;
+        border-bottom: 1px solid #eee;
+        padding: 5px 0;
+    }
+
+        .parameter li span {
+            display: table-cell;
+            width: 40%;
+            vertical-align: top;
+            padding: 5px 0;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .parameter li div {
+            display: table-cell;
+            width: auto;
+            vertical-align: top;
+            padding: 6px 5px;
+            font-size: 14px;
+            color: #333;
+        }
+/*end*/
+
+/*style chọn mức giá*/
+.filter .price {
+    margin-right: 20px;
+}
+
+.filter .fl {
+    float: left;
+}
+
+.filter .price * {
+    display: inline-block;
+    vertical-align: top;
+    padding-right: 10px;
+    line-height: 40px;
+}
+
+.filter .price a {
+    color: #288ad6;
+    position: relative;
+    text-decoration: none;
+}
+
+    .filter .price a:hover {
+        color: #333;
+    }
+/*end*/
+
+.related-product-name {
+    position: relative;
+    top: -25px;
+    color: #fa8072;
+}
+
+.viewmore {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    line-height: 40px;
+    font-size: 14px;
+    color: #288ad6;
+    border: 1px solid #eee;
+    text-align: center;
+    border-radius: 3px;
+    margin: 10px auto 20px;
+    width: 240px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+    .viewmore:hover {
+        color: #eee;
+        background: #288ad6;
+        font-weight: bold;
+    }
+
+/*filter brand*/
+.filter .manu a {
+    float: left;
+    width: 12.41%;
+    border: 1px solid #eee;
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    margin: 0 0 -1px -1px;
+    color: #288ad6;
+    text-align: center;
+}
+
+    .filter .manu a img {
+        max-height: 70%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+    }
+
+    .filter .manu a.check {
+        border-color: #52a2e1;
+        z-index: 1;
+        position: relative;
+    }
+
+        .filter .manu a.check:after {
+            content: "";
+            width: 23px;
+            height: 20px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAoCAYAAACB4MgqAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo1RDlCNUE2MjRCQjgxMUVBQTEyRkEwNENDMEQzMkE2MiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo1RDlCNUE2MzRCQjgxMUVBQTEyRkEwNENDMEQzMkE2MiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjVEOUI1QTYwNEJCODExRUFBMTJGQTA0Q0MwRDMyQTYyIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjVEOUI1QTYxNEJCODExRUFBMTJGQTA0Q0MwRDMyQTYyIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+O8UzUAAAA0RJREFUeNrUmF1IU2EYx//vu6ObMnXT+Vmnm+wiYhFRpBWVJRFp0gfd6G4KupCQvgiKvq4iIbA06koKuiiKCIO8sCuzLxreKEL2KVZm6HTZckOd5/SclWTmcmc7m+c88LJn5z1n+51nz/s/739s981eGQYKBiaByUcFQ0EzFqCXShpNgoFKPcA52yFJslt5y41Rabw2yeYiSt1Tx7gB2qONm/laSnumH+c6h75dkCVupXR45hzXb0vz2nsusYrSsdnmNQXPtQqoK8/D8Y2OWMoc5IwfoOwkjbBSrZmq2FNMOFeag9w0AWYh6nr4GMdeSGiZ60RNwK3JHGdLs0PQgQkJl554onmw9AmMlwUhdURyfsytYhEYzmzJxiJbMiYmZdS2DuLd0Lha6E4L54rcdUR6TUzgSXT1iZJsFDrMmJRk1FGlu76OqVWORxkZKesp/azmurDgNgvHgvTwncQZcGyDA848C2RZxrUXw3B/Cqjtj0bnQrFM6W21RQsLfn5bLuor8rFrWfqs8weLM7FaTA3lN9q/ofXDqJoyy4yz05Qp6hGM5tcOC/7WM678jHCttKG6KBMm9mdu/yo7Ni22hvI7HSNo7vapYIbywS6lNrG0adheuPJsKLTYNhdaUbrEihzS6IuPB1G+NA1lNJRofuXD3c4RNdBembOdpM5tsYpCWHBixlXq235fEJUrMrA834KGigLYU02h+db3P3C93asGugempO2Qg91aSPCcqnK/6zupxRDG6U6moF9+9IduSkVTu1N/7e40gY74AfS81w/PaBA167LQ653A5aceSHLEcteUZROqAl74tdxeRPzkfEOLteZBvzq142hwVolHvjzsl7TehMVld6j4Qurpw5QeoiHF4zs0t27TfWE8t72CxqX+yxfGM7h2lf7XF+oeXPGFZo7imb5Q1+DTfKEXCYyYwKmfL/zPF+pvcSq+EKyaLGHjfJnpaMAj9oW6AVfrC3XR44ov5Ba2Ro0vnHdwgm757Qv79PKHEY+AutEpiuXR+ML5ASdfyBk7FYsvTPjiVHyhzNg+su+3oNMQ4ukLEwautS9MUI9r7wvjDq74QoddKKF0AAYJEg5e73SJeyj3w0DxU4ABAGYG7XZm8JELAAAAAElFTkSuQmCC) no-repeat left top;
+            background-size: 23px 20px;
+            z-index: 2;
+        }
+/*end*/
+
+.brand-wrapper .owl-item {
+    height: 142px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnRefresh::before {
+    font-weight: 600;
+    font-size: 20px;
+    color: #52a2e1;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+    .btnRefresh::before:hover {
+        color: #5a88ca;
+    }
+
+/*style profile*/
+.glyphicon {
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+small {
+    display: block;
+    line-height: 1.428571429;
+    color: #999;
+}
+
+/* style profile*/
+.style-profile {
+    font-size: 20px;
+}
+
+.btnAvatar {
+    border: 1px solid #ccc !important;
+    display: none;
+    padding: 6px 13px !important;
+    cursor: pointer !important;
+}
+
+.message {
+    color: #ff0000;
+    font-size: 16px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+/* The container */
+.containerRadio {
+    display: inline-block;
+    position: relative;
+    padding-left: 22px;
+    margin-right: 20px;
+    cursor: pointer;
+    font-size: 20px;
+    user-select: none;
+}
+
+    /* Hide the browser's default radio button */
+    .containerRadio input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.containerRadio:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.containerRadio input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.containerRadio input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.containerRadio .checkmark:after {
+    top: 6px;
+    left: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+/* style modal change password*/
+/* Full-width input fields */
+#id01 input[type=text], input[type=password] {
+    width: 100%;
+    padding: 2px 20px;
+    margin: 8px 0;
+    font-size: 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+#id01 button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+    #id01 button:hover {
+        opacity: 0.8;
+    }
+
+/* Extra styles for the cancel button */
+#id01 .cancelbtn {
+    background-color: #f44336;
+}
+
+/* Center the image and position the close button */
+#id01 .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+
+#id01 img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+#id01 .container {
+    padding: 16px;
+}
+
+#id01 span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* The Modal (background) */
+#id01 .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+.modalChangePass {
+    padding: 20px;
+}
+
+/* Modal Content/Box */
+#id01 .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 50%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+#id01 .close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+    #id01 .close:hover,
+    #id01 .close:focus {
+        color: red;
+        cursor: pointer;
+    }
+
+/* Add Zoom Animation */
+#id01 .animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    #id01 span.psw {
+        display: block;
+        float: none;
+    }
+
+    #id01 .cancelbtn {
+        width: 100%;
+    }
+}

@@ -15,6 +15,7 @@ namespace Model.DTO
         public string description { get; set; }
         public string content { get; set; }
         public int quantity { get; set; }
+        public bool status { get; set; }
         public string brand { get; set; }
         public string type { get; set; }
         public string cpu { get; set; }
