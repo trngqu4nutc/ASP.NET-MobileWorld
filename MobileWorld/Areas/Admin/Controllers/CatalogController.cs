@@ -18,10 +18,10 @@ namespace MobileWorld.Areas.Admin.Controllers
         }
         
         [HttpGet]
-        public JsonResult GetAll(string name, int idbrand, int idtype, int page, int pageSize)
+        public JsonResult GetAll(string name, int idbrand, int idtype, int status, int page, int pageSize)
         {
             var catalogDao = new CatalogDao();
-            var result = catalogDao.GetAll(name, idbrand, idtype,page, pageSize);
+            var result = catalogDao.GetAll(name, idbrand, idtype, status, page, pageSize);
             var types = catalogDao.GetCatalogType();
             return Json(new
             {

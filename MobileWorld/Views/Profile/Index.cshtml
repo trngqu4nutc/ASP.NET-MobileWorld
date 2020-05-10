@@ -1,0 +1,202 @@
+﻿
+@{
+    ViewBag.Title = "Thông tin cá nhân";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*@section scriptFooter {
+    <script src="~/Assets/user/js/myJs/profileAjax.js"></script>
+}*@
+<div class="well well-sm style-profile">
+    <div style="display: flex; position: relative;">
+        <div>
+            <img id="avatar" src="@ViewBag.urlavatar" alt="avatar"
+                 class="img-rounded img-responsive" style="width: 400px; height: 400px; margin-bottom: 10px;" />
+            @*@using (Html.BeginForm("uploadimage", "user", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(x => x.id);
+                <label class="custom-file-upload" style="border: 1px solid #ccc; display: inline-block; padding: 6px 12px; cursor: pointer;">
+                    <input type="file" name="file" id="file" style="display: none;" />
+                    Thay đổi ảnh đại diện
+                </label>
+                <input type="submit" id="changeAvatar" value="Thay đổi" class="btnAvatar" />
+                <input type="button" id="cancelAvatar" value="Hủy" data-id="@Model.id" class="btn-danger btnAvatar" />
+            }*@
+        </div>
+
+        <div style="margin-left: 20px;">
+            <h2>Thông tin cá nhân</h2>
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert @TempData["TypeAlert"] alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>@TempData["Message"] !</strong>
+                </div>
+            }
+
+            <dl class="dl-horizontal" style="margin-bottom: 0;">
+                <dt>
+                    Tài khoản
+                </dt>
+
+                <dd>
+                    Tài khoản
+                </dd>
+            </dl>
+            <dl class="dl-horizontal" id="info">
+                <dt>
+                    Họ tên
+                </dt>
+
+                <dd>
+                    Họ tên
+                </dd>
+
+                <dt>
+                    Số điện thoại
+                </dt>
+
+                <dd>
+                    Số điện thoại
+                </dd>
+
+                <dt>
+                    Email
+                </dt>
+
+                <dd>
+                    Email
+                </dd>
+
+                <dt>
+                    Địa chỉ
+                </dt>
+
+                <dd>
+                    Địa chỉ
+                </dd>
+
+                <dt>
+                    Ngày đăng kí
+                </dt>
+
+                <dd>
+                    Ngày đăng kí
+                </dd>
+
+                <dt>
+                    Giới tính
+                </dt>
+
+                <dd>
+                    Nam
+                </dd>
+
+                <dt>
+                    <button id="btnChangeInfo" class="btn btn-primary" style="margin-top: 20px; outline: none;">Cập nhật thông tin</button>
+                </dt>
+
+                <dd style="margin-top: 20px; outline: none;" id="ddGroupBtn">
+                    <button class="btn btn-success" style="outline: none;">Lịch sử mua hàng</button>
+                    <button type="button" class="btn btn-info" style="outline: none; margin-left: 15px;"
+                            onclick="document.getElementById('id01').style.display='block'">
+                        Đổi mật khẩu
+                    </button>
+                </dd>
+            </dl>
+            @*@using (Html.BeginForm("UpdateInfo", "user", FormMethod.Post, new { @style = "display: none;", @id = "formInfo" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(x => x.id);
+                <dl class="dl-horizontal" id="changeInfo" style="width: 415px;">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.fullname)
+                    </dt>
+
+                    <dd>
+                        @Html.TextBoxFor(model => model.fullname, new { @class = "form-control" })
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.phonenumber)
+                    </dt>
+
+                    <dd>
+                        @Html.TextBoxFor(model => model.phonenumber, new { @class = "form-control" })
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.email)
+                    </dt>
+
+                    <dd>
+                        @Html.TextBoxFor(model => model.email, new { @class = "form-control" })
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.address)
+                    </dt>
+
+                    <dd>
+                        @Html.TextBoxFor(model => model.address, new { @class = "form-control" })
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.gender)
+                    </dt>
+
+                    <dd>
+                        <label class="containerRadio">
+                            Nữ
+                            @Html.RadioButtonFor(m => m.gender, 0)
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="containerRadio">
+                            Nam
+                            @Html.RadioButtonFor(m => m.gender, 1)
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="containerRadio">
+                            Ẩn
+                            @Html.RadioButtonFor(m => m.gender, 2)
+                            <span class="checkmark"></span>
+                        </label>
+                    </dd>
+
+                    <dt>
+                        <button type="submit" id="btnOkeInfo" class="btn btn-success btnAvatar" style="margin-top: 20px; outline: none; display: initial;">Xác nhận</button>
+                    </dt>
+
+                    <dd style="margin-top: 20px; outline: none;" id="cancelInfo">
+                        <a href="@Url.Action("profile", "user", new { id=Model.id})" class="btn btn-warning" style="outline: none;">Hủy</a>
+                    </dd>
+                </dl>
+            }*@
+        </div>
+
+    </div>
+</div>
+
+<div id="id01" class="modal">
+    @*@using (Html.BeginForm("changePassword", "user", FormMethod.Post, new { @class = "modal-content animate" }))
+    {
+        <h3 style="text-align: center; margin-top: 20px;">Thay đổi mật khẩu</h3>
+        @Html.HiddenFor(m => m.id)
+        @Html.HiddenFor(m => m.email)
+        <div class="modalChangePass">
+            <label for="oldpass"><b>Mật khẩu cũ</b></label>
+            <input type="password" id="oldpass" name="oldpass" required>
+
+            <label for="newpass"><b>Mật khẩu mới</b></label>
+            <input type="password" id="newpass" name="newpass" required>
+
+            <label for="repass"><b>Nhập lại mật khẩu</b></label>
+            <input type="password" id="repass" name="repass" required>
+
+            <button type="submit">Xác nhận</button>
+            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Hủy</button>
+        </div>
+    }*@
+
+</div>

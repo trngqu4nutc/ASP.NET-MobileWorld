@@ -1,7 +1,11 @@
 ﻿var homeConfig = {
     page: 1,
     pageIndex: 1,
-    pageSize: 5
+    pageSize: 5,
+    idbrand: 0,
+    idtype: 0,
+    seach: '',
+    status: 2
 }
 var homeController = {
     init: function () {
@@ -91,6 +95,7 @@ var homeController = {
             $('#exampleModal').modal('hide');
         });
         $('#btnSeach').off('click').on('click', function () {
+            homeConfig.seach = $('#txtSeach').val();
             homeController.loadData(true);
         });
         $('#btnReset').off('click').on('click', function () {
@@ -109,8 +114,12 @@ var homeController = {
         });
         $('.btnDelete').off('click').on('click', function () {
             var id = $(this).data('id');
+            let msg = '<h5>Ngừng kinh doanh sản phẩm này?</h5>';
+            if ($(this).data('status') == false) {
+                msg = '<h5>Kinh doanh trở lại sản phẩm này?</h5>';
+            }
             bootbox.confirm({
-                message: "<h5>Xóa sản phẩm này?</h5>",
+                message: msg,
                 buttons: {
                     confirm: {
                         label: "Yes",
@@ -128,6 +137,18 @@ var homeController = {
                 }
             });
         });
+        $('#slBrand').off('change').on('change', function () {
+            homeConfig.idbrand = parseInt($(this).val());
+            homeController.loadData(true);
+        });
+        $('#slType').off('change').on('change', function () {
+            homeConfig.idtype = parseInt($(this).val());
+            homeController.loadData(true);
+        });
+        $('#slActive').off('change').on('change', function () {
+            homeConfig.status = parseInt($(this).val());
+            homeController.loadData(true);
+        });
     },
     deletaCatalog: function (id) {
         $.ajax({
@@ -137,16 +158,16 @@ var homeController = {
             dataType: 'json',
             success: (res) => {
                 if (res.status) {
-                    bootbox.alert('Xóa thành công');
+                    bootbox.alert('Thay đổi thành công');
                     homeController.loadData(true);
                     setTimeout(() => {
                         bootbox.hideAll();
-                    }, 2000);
+                    }, 1500);
                 } else {
-                    bootbox.alert('Xóa không thành công');
+                    bootbox.alert('Thay đổi không thành công');
                     setTimeout(() => {
                         bootbox.hideAll();
-                    }, 2000);
+                    }, 1500);
                 }
             },
             error: (err) => {
@@ -251,6 +272,12 @@ var homeController = {
         });
     },
     resetForm: function () {
+        homeConfig.idbrand = 0;
+        homeConfig.idtype = 0;
+        homeConfig.status = 2;
+        homeConfig.seach = '';
+        $('#slActive').val('2');
+        $('#txtSeach').val('');
         $('.form-control').removeClass('error');
         $('.error').hide();
         $('#id').val('0');
@@ -286,11 +313,12 @@ var homeController = {
             url: '/Catalog/GetAll',
             type: 'GET',
             data: {
-                name: $('#txtSeach').val(),
-                idbrand: $('#slBrand').val(),
-                idtype: $('#slType').val(),
+                name: homeConfig.seach,
+                idbrand: homeConfig.idbrand,
+                idtype: homeConfig.idtype,
                 page: homeConfig.pageIndex,
-                pageSize: homeConfig.pageSize
+                pageSize: homeConfig.pageSize,
+                status: homeConfig.status
             },
             dataType: 'json',
             success: function (response) {
@@ -308,7 +336,10 @@ var homeController = {
                             screen: item.screen,
                             ram: item.ram,
                             cpu: item.cpu,
-                            quantity: item.quantity
+                            quantity: item.quantity,
+                            status: item.status,
+                            style: item.status ? 'warning' : 'danger',
+                            icon: item.status ? 'fa-check-double' : 'fa-lock-open',
                         });
                     });
                     $('#tblData').html(html);

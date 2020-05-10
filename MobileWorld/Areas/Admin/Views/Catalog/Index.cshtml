@@ -17,8 +17,17 @@
                         <b id="total"></b>
                     </div>
                     <div class="col-lg-4">
-                        <div class="fa-pull-right">
-                            <input type="text" class="form-control" id="txtSeach" name="seachUser" placeholder="Tìm kiếm" />
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" id="txtSeach" name="seachUser" placeholder="Tìm kiếm" />
+                            </div>
+                            <div class="col-lg-4">
+                                <select id="slActive" class="form-control">
+                                    <option value="2">Tất cả</option>
+                                    <option value="1">Active</option>
+                                    <option value="0">Looked</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -77,14 +86,11 @@
         <td>{{quantity}}</td>
         <td>
             <button data-id="{{id}}" class="btnEdit btn btn-sm btn-info"><i class="fas fa-edit"></i></button>
-            <button data-id="{{id}}" class="btnDelete btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
+            <button data-id="{{id}}" data-status="{{status}}" class="btnDelete btn btn-sm btn-{{style}}"><i class="fas {{icon}}"></i></button>
         </td>
     </tr>
 </script>
 
-@*<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Xóa
-    </button>*@
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -279,7 +285,7 @@
 
 @section ClientScript
 {
-    <script src="/Assets/admin/controller/catalogController1.js"></script>
+    <script src="/Assets/admin/controller/catalogController2.js"></script>
 }
 
 
